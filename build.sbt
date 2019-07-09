@@ -8,10 +8,10 @@ resolvers += "scalac repo" at "https://raw.githubusercontent.com/ScalaConsultant
 
 val circeVersion = "0.11.1"
 libraryDependencies ++= Seq(
+  "org.scalaj" %% "scalaj-http" % "2.3.0",
   "com.github.slack-scala-client" %% "slack-scala-client" % "0.2.6",
   "io.circe" %% "circe-core" % circeVersion,
   "io.circe" %% "circe-generic"% circeVersion,
   "io.circe" %% "circe-parser"% circeVersion
 )
-
 //libraryDependencies += "com.github.slack-scala-client" %% "slack-scala-client" % "0.2.6"
