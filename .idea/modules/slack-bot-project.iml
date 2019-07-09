@@ -15,7 +15,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="sbt: org.typelevel:macro-compat_2.11:1.1.1:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.scalaj:scalaj-http_2.11:2.3.0:jar" level="project" />
     <orderEntry type="library" name="sbt: org.scala-lang.modules:scala-parser-combinators_2.11:1.1.1:jar" level="project" />
     <orderEntry type="library" name="sbt: org.scala-lang.modules:scala-java8-compat_2.11:0.7.0:jar" level="project" />
     <orderEntry type="library" name="sbt: org.scala-lang.modules:scala-async_2.11:0.9.7:jar" level="project" />
@@ -50,5 +49,6 @@
     <orderEntry type="library" name="sbt: org.typelevel:cats-macros_2.11:1.5.0:jar" level="project" />
     <orderEntry type="library" name="sbt: org.typelevel:jawn-parser_2.11:0.14.1:jar" level="project" />
     <orderEntry type="library" name="sbt: org.typelevel:machinist_2.11:0.6.6:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.scalaj:scalaj-http_2.11:2.4.2:jar" level="project" />
   </component>
 </module>
