@@ -1,0 +1,5 @@
+package clients
+
+class SlackClient {
+
+}

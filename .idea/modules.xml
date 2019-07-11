@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/project-slack-bot-project-build.iml" filepath="$PROJECT_DIR$/.idea/modules/project-slack-bot-project-build.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/slack-bot-project.iml" filepath="$PROJECT_DIR$/.idea/modules/slack-bot-project.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/slack-bot-project-build.iml" filepath="$PROJECT_DIR$/.idea/modules/slack-bot-project-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/slackbots_5951.iml" filepath="$PROJECT_DIR$/.idea/modules/slackbots_5951.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/slackbots_5951-build.iml" filepath="$PROJECT_DIR$/.idea/modules/slackbots_5951-build.iml" />
     </modules>
   </component>
 </project>
