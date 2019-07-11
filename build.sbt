@@ -66,4 +66,8 @@ scalacOptions ++= Seq(
 //  "-Ywarn-value-discard"               // Warn when non-Unit expression results are unused.
 )
 
-wartremoverErrors ++= Warts.unsafe
+wartremoverErrors ++= Warts.allBut(Wart.NonUnitStatements)
+
+import com.scalapenos.sbt.prompt.SbtPrompt.autoImport._
+
+promptTheme := com.scalapenos.sbt.prompt.PromptThemes.ScalapenosTheme

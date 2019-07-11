@@ -1,18 +1,29 @@
 package clients
 
-import config.BotConfig
+import akka.actor.ActorSystem
+import config.MTM
+import scalaj.http.{Http, HttpRequest, HttpResponse}
+import pureconfig.generic.auto._
+import slack.SlackUtil
+import slack.rtm.SlackRtmClient
+
+import scala.concurrent.ExecutionContextExecutor
 
 object MTMClient extends App {
 
-  pureconfig.loadConfig[BotConfig]
+  val config: MTM = pureconfig.loadConfig[MTM] match {
+    case Left(error) =>
+      println("ERROR: " + error.toList.toString())
+      sys.exit()
+    case Right(success) => success
+  }
 
-  val posturl = ("https://api.mtm.headstorm.com/api/v1/oauth/token/")
-  val geturl = Http("https://api.mtm.headstorm.com/api/external/v1/consultant_locations/this_week")
+  val posturl: String = ("https://api.mtm.headstorm.com/api/v1/oauth/token/")
+  val geturl: HttpRequest = Http("https://api.mtm.headstorm.com/api/external/v1/consultant_locations/this_week")
 
-  val auth_key = Http(posturl)
-    .postMulti(MultiPart())
-    .param("client_id", "4")
-    .param("client_secret", "")
+  val auth_key: HttpResponse[String] = Http(posturl)
+    .param("client_id", config.clientId)
+    .param("client_secret", config.clientSecret)
     .param("grant_type", "client_secret")
     .param("scope", "api")
     .asString
@@ -56,13 +67,13 @@ object MTMClient extends App {
   //foo asjson
   //proxy to interpret the requests - charles proxy
 
-  val token = ""
+  val token: String = ""
 
-  implicit val system = ActorSystem("slack")
-  implicit val ec = system.dispatcher
+  implicit val system: ActorSystem = ActorSystem("slack")
+  implicit val ec: ExecutionContextExecutor = system.dispatcher
 
-  val client = SlackRtmClient(token)
-  val selfId = client.state.self.id
+  val client: SlackRtmClient = SlackRtmClient(token)
+  val selfId: String= client.state.self.id
 
   client.onMessage { message =>
     val mentionedIds = SlackUtil.extractMentionedIds(message.text)
