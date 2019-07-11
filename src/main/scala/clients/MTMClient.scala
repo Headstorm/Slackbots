@@ -24,7 +24,7 @@ object MTMClient extends App {
   val auth_key: HttpResponse[String] = Http(posturl)
     .param("client_id", config.clientId)
     .param("client_secret", config.clientSecret)
-    .param("grant_type", "client_secret")
+    .param("grant_type", "client_credentials") //client_credentials not client_secret
     .param("scope", "api")
     .asString
   //  val auth_key = Http(posturl).
@@ -66,6 +66,7 @@ object MTMClient extends App {
   //semiautomatic
   //foo asjson
   //proxy to interpret the requests - charles proxy
+  //circleci file describe how to do the build
 
   val token: String = ""
 

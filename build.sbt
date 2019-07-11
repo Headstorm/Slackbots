@@ -71,3 +71,7 @@ wartremoverErrors ++= Warts.allBut(Wart.NonUnitStatements)
 import com.scalapenos.sbt.prompt.SbtPrompt.autoImport._
 
 promptTheme := com.scalapenos.sbt.prompt.PromptThemes.ScalapenosTheme
+
+//enablePlugins(JavaAppPackaging)
+//enablePlugins(DockerPlugin)
+//mainClass in Compile := Some("com.lightbend.akka.http.sample.QuickstartServer")
