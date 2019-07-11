@@ -1,6 +1,5 @@
 package run
 
-import java.net.HttpURLConnection
 
 import akka.actor.ActorSystem
 import com.sun.corba.se.spi.transport.ReadTimeouts
@@ -9,28 +8,73 @@ import play.api.libs.json.Json
 import slack.SlackUtil
 import slack.rtm.SlackRtmClient
 import scalaj.http.{Http, MultiPart, Token}
+///
+import java.io._
+import org.apache.commons._
+import org.apache.http._
+import org.apache.http.client._
+import org.apache.http.client.methods.HttpPost
+import java.util.ArrayList
+import org.apache.http.message.BasicNameValuePair
+import org.apache.http.client.entity.UrlEncodedFormEntity
+import org.apache.http.client.HttpClient
+import org.apache.http.message.BasicNameValuePair
+import org.apache.http.impl.client.HttpClientBuilder
+import scala.sys.process._
+
 
 object Example extends App {
 
-  val posturl = Http("https://api.mtm.headstorm.com/api/v1/oauth/token/")
+  val posturl = ("https://api.mtm.headstorm.com/api/v1/oauth/token/")
   val geturl = Http("https://api.mtm.headstorm.com/api/external/v1/consultant_locations/this_week")
 
+///////////////////
+val auth_key = Http(posturl)
+  .postMulti(MultiPart())
+  .param("client_id", "4")
+  .param("client_secret", "")
+  .param("grant_type", "client_secret")
+  .param("scope", "api")
+  .asString
+//  val auth_key = Http(posturl).
+//    postMulti(MultiPart("client_id", "client_secret", "grant_type", "scope")).
+//    postMulti(MultiPart("4", "zE1y8kOSqGzPogc9P0oKERtsTjem6I60bjIbwbCr", "client_credentials", "api")).asString
 
 
-  val auth_key = Http("https://api.mtm.headstorm.com/api/v1/oauth/token/").postMulti(MultiPart(
-    "4", "zE1y8kOSqGzPogc9P0oKERtsTjem6I60bjIbwbCr", "client_credentials", "api"
-  )).asString
+//  val post = new HttpPost(posturl)
+////  post.addHeader("client_id", "4")
+////  post.addHeader("client_secret", "")
+////  post.addHeader("grant_type", "client_credentials")
+////  post.addHeader("scope", "api")
+////  post.addHeader("Content-type","application/json")
+//
+//
+//  val postclient = HttpClientBuilder.create.build
+//
+//  val nameValuePairs = new ArrayList[NameValuePair](1)
+//  nameValuePairs.add(new BasicNameValuePair("client_id", "4"))
+//  nameValuePairs.add(new BasicNameValuePair("client_secret", ""))
+//  nameValuePairs.add(new BasicNameValuePair("grant_type", "client_credentials"))
+//  nameValuePairs.add(new BasicNameValuePair("scope", "api"))
+//  post.setEntity(new UrlEncodedFormEntity(nameValuePairs))
+//
+//
+////  Http(posturl).postData(s"${post.setEntity(new UrlEncodedFormEntity(nameValuePairs))}").method("POST").header("content-type","application/json").asString
+//
+//
+////  val auth_key = postclient.execute(post)
+//  val resp = postclient.execute(post).getEntity.getContent
+////  val auth_key = scala.io.Source.fromInputStream(resp)
+//  println("--- HEADERS ---")
+////
+////  auth_key.getAllHeaders.foreach(arg => println(arg))
+//////////////////
 
-//  val auth_key = posturl
-//    .param("client_id", "4")
-//    .param("client_secret", "zE1y8kOSqGzPogc9P0oKERtsTjem6I60bjIbwbCr")
-//    .param("grant_type", "client_credentials")
-//    .param("scope", "api")
-//    .asString
-
-  println("auth key: ", auth_key)
-
-
+//pass data as raw json application
+  // case class
+  //semiautomatic
+  //foo asjson
+  //proxy to interpret the requests - charles proxy
 
 
 
