@@ -12,6 +12,7 @@ libraryDependencies ++= Seq(
   "com.github.slack-scala-client" %% "slack-scala-client" % "0.2.6",
   "io.circe" %% "circe-core" % circeVersion,
   "io.circe" %% "circe-generic"% circeVersion,
-  "io.circe" %% "circe-parser"% circeVersion
+  "io.circe" %% "circe-parser"% circeVersion,
+  "com.github.pureconfig" %% "pureconfig" % "0.11.1"
 )
 //libraryDependencies += "com.github.slack-scala-client" %% "slack-scala-client" % "0.2.6"

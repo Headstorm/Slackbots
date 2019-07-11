@@ -1,21 +1,14 @@
 package run
 
-import java.net.HttpURLConnection
-
 import akka.actor.ActorSystem
-import com.sun.corba.se.spi.transport.ReadTimeouts
-import javax.print.DocFlavor.URL
-import play.api.libs.json.Json
 import slack.SlackUtil
 import slack.rtm.SlackRtmClient
-import scalaj.http.{Http, MultiPart, Token}
+import scalaj.http.{Http, MultiPart}
 
 object Example extends App {
 
   val posturl = Http("https://api.mtm.headstorm.com/api/v1/oauth/token/")
   val geturl = Http("https://api.mtm.headstorm.com/api/external/v1/consultant_locations/this_week")
-
-
 
   val auth_key = Http("https://api.mtm.headstorm.com/api/v1/oauth/token/").postMulti(MultiPart(
     "4", "zE1y8kOSqGzPogc9P0oKERtsTjem6I60bjIbwbCr", "client_credentials", "api"
@@ -30,10 +23,6 @@ object Example extends App {
 
   println("auth key: ", auth_key)
 
-
-
-
-
   val token = ""
 
 
@@ -42,9 +31,6 @@ object Example extends App {
 
   val client = SlackRtmClient(token)
   val selfId = client.state.self.id
-
-
-
 
   client.onMessage { message =>
     val mentionedIds = SlackUtil.extractMentionedIds(message.text)
