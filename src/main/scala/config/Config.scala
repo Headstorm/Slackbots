@@ -1,7 +1,7 @@
 package config
 
-sealed trait Slackbots
+final case class Mtm(clientId: String, clientSecret: String)
 
-final case class MTM(clientId: String, clientSecret: String) extends Slackbots
+final case class Slack(token: String)
 
-final case class Slack(token: String) extends Slackbots
+final case class Config(slack: Slack, mtm: Mtm)
