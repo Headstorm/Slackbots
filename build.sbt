@@ -4,9 +4,13 @@ scalaVersion := "2.12.8"
 
 version := "0.1"
 
+mainClass in (Compile, run) := Some("com.headstorm.slackbots.server.BotServer")
+
 resolvers += "scalac repo" at "https://raw.githubusercontent.com/ScalaConsultants/mvn-repo/master/"
+resolvers += Resolver.sonatypeRepo("snapshots")
 
 val circeVersion = "0.11.1"
+val http4sVersion = "0.21.0-SNAPSHOT"
 
 libraryDependencies ++= Seq(
   "org.scalaj" %% "scalaj-http" % "2.4.2",
@@ -15,7 +19,10 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-generic"% circeVersion,
   "io.circe" %% "circe-parser"% circeVersion,
   "com.github.pureconfig" %% "pureconfig" % "0.11.1",
-  "org.apache.httpcomponents" % "httpclient" % "4.5.9"
+  "com.outr" %% "scribe" % "2.7.3",
+  "org.http4s" %% "http4s-dsl" % http4sVersion,
+  "org.http4s" %% "http4s-blaze-server" % http4sVersion,
+  "org.http4s" %% "http4s-blaze-client" % http4sVersion
 )
 
 scalacOptions ++= Seq(
@@ -66,7 +73,7 @@ scalacOptions ++= Seq(
 //  "-Ywarn-value-discard"               // Warn when non-Unit expression results are unused.
 )
 
-wartremoverErrors ++= Warts.allBut(Wart.NonUnitStatements)
+wartremoverErrors ++= Warts.allBut(Wart.NonUnitStatements, Wart.Any, Wart.Nothing)
 
 import com.scalapenos.sbt.prompt.SbtPrompt.autoImport._
 
@@ -74,4 +81,3 @@ promptTheme := com.scalapenos.sbt.prompt.PromptThemes.ScalapenosTheme
 
 //enablePlugins(JavaAppPackaging)
 //enablePlugins(DockerPlugin)
-//mainClass in Compile := Some("com.lightbend.akka.http.sample.QuickstartServer")
