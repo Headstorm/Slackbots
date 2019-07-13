@@ -21,8 +21,8 @@ class DiagnosticService[F[_]](implicit F: Sync[F]) {
   }
 
   val botService: HttpRoutes[F] = HttpRoutes.of[F] {
-    case GET -> Root / "hello" / name =>
-      Ok(s"Hello, $name.")
+    case GET -> Root / "info" =>
+      Ok("")
   }
 
 }
