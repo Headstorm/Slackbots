@@ -3,11 +3,11 @@ package com.headstorm.slackbots.server
 import cats.effect._
 import cats.syntax.semigroupk._
 import com.headstorm.slackbots.bots.{ChessBot, MTMBot, StandupBot}
-import com.headstorm.slackbots.clients.LichessClient
+import com.headstorm.slackbots.clients.{LichessClient, MTMClient}
 import com.headstorm.slackbots.server.services.{BotService, DiagnosticService}
 import org.http4s.HttpRoutes
 
-/** Modular constructor for services
+/** Modular constructor for Bots and Services
   *
   * @param F: The application type, usually IO
   * @tparam F: Same as F above
@@ -23,6 +23,6 @@ class Module[F[_]](
 
   //Initialize Headstorm Bots
   new StandupBot
-  new MTMBot
+  new MTMBot[F](new MTMClient[F])
   new ChessBot[F](new LichessClient[F])
 }

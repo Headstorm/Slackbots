@@ -4,13 +4,13 @@ import com.headstorm.slackbots.config._
 import io.circe
 import io.circe.generic.auto._
 import io.circe.parser._
-import scalaj.http.{Http, HttpRequest, HttpResponse}
+import scalaj.http.{Http, HttpResponse}
 import scribe._
 
 class MTMClient[F[_]]() {
 
-  val postUrl: String = s"${config.clients.mtm.api}/v1/oauth/token/"
-  val getUrl: HttpRequest = Http(s"${config.clients.mtm.api}/external/v1/consultant_locations/this_week")
+  private val postUrl: String = s"${config.clients.mtm.api}/v1/oauth/token/"
+  //TODO: private val getUrl: HttpRequest = Http(s"${config.clients.mtm.api}/external/v1/consultant_locations/this_week")
 
   def getAccessToken: Either[circe.Error, String] = {
     val response: HttpResponse[String] = Http(postUrl)
@@ -28,7 +28,7 @@ class MTMClient[F[_]]() {
     ???
   }
 
-  def setConsultantLocation: Either[Error, String] = {
+  def setConsultantLocation(user: String): Either[Error, String] = {
     ???
   }
 

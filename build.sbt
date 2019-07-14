@@ -1,8 +1,8 @@
-name := "slack-bot-project"
+name := "slack-bots"
 
 scalaVersion := "2.12.8"
 
-version := "0.1"
+version := "0.2.0"
 
 resolvers += "scalac repo" at "https://raw.githubusercontent.com/ScalaConsultants/mvn-repo/master/"
 resolvers += Resolver.sonatypeRepo("snapshots")
