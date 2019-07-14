@@ -9,10 +9,10 @@ import scribe._
 
 object BotServer extends IOApp {
 
-  private val mod = new Module[IO]()
-  private val routes: HttpRoutes[IO] = mod.httpService
-
   override def run(args: List[String]): IO[ExitCode] = {
+
+    val mod = new Module[IO]()
+    val routes: HttpRoutes[IO] = mod.httpService
 
     this.logger.info("Starting SlackBots Server")
 
