@@ -7,7 +7,7 @@ import io.circe.parser._
 import scalaj.http.{Http, HttpResponse}
 import scribe._
 
-class MTMClient[F[_]]() {
+class MTMClient[F[_]]() extends Client {
 
   private val postUrl: String = s"${config.clients.mtm.api}/v1/oauth/token/"
   //TODO: private val getUrl: HttpRequest = Http(s"${config.clients.mtm.api}/external/v1/consultant_locations/this_week")

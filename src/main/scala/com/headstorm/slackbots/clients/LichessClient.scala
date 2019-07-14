@@ -7,7 +7,7 @@ import io.circe.parser._
 import scalaj.http.{Http, HttpResponse}
 import scribe._
 
-class LichessClient[F[_]]() {
+class LichessClient[F[_]]() extends Client {
 
   def challengeUser(userName: String): Either[circe.Error, CreateChallengeResponse] = {
 
