@@ -8,19 +8,19 @@ Run bot server locally with `sbt run`
 
 You need to have the environment variables set which are named in the `application.conf` in order to auth with the Slack API
 
-##Bots
+## Bots
 
 Bots are located in the `bots` package
 
-###Standup Bot
+### Standup Bot
 
 Asynchronous standup bot
 
-###MTM Bot
+### MTM Bot
 
 Bot that integrates with the MTM Api.  Get and set consultant locations from Slack.
 
-###Harvest Bot
+### Harvest Bot
 
 Bot that integrates with the Harvest API.
 
