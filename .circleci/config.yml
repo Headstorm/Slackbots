@@ -1,0 +1,19 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/slack-bot-project
+
+    docker:
+      -image: openjdk:8
+
+    environemnt:
+      SBT_VERSION: 1.0.4
+
+    steps:
+      - checkout
+      -run:
+        name: Get sbt binary
+        command: docker build -t /mtmbot .
+      -run:
+        name: run image
+        command: docker run -v /Users/faisalalnahhas/Documents/Faisal Alnahhas/slack-bot-project:/app/ mtmbot

@@ -15,5 +15,7 @@ trait Bot {
   protected lazy val client: SlackRtmClient = SlackRtmClient(token)
   protected lazy val state: RtmState = client.state
   protected lazy val selfId: String = state.self.id
+  protected lazy val getCommand: String = "get"
+  protected lazy val updateCommand: String = "update"
 
 }
