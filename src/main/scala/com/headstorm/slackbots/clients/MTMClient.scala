@@ -4,7 +4,7 @@ import com.headstorm.slackbots.config._
 import io.circe
 import io.circe.generic.auto._
 import io.circe.parser._
-import scalaj.http.{Http, HttpRequest, HttpResponse}
+import scalaj.http.{Http, HttpResponse}
 import scribe._
 
 
@@ -46,10 +46,10 @@ class MTMClient[F[_]]() extends Client {
   def setConsultantLocation(user: String): Either[circe.Error, String] = {
     ???
 //    val states = Map("1" -> "Home", "2" -> "Office", "3" -> "Client", "4" -> "PTO")
-    val response: HttpRequest = Http(postUrl)
-      .postData(s"""{"client_id":${config.clients.mtm.clientId}, "client_secret": "${config.clients.mtm.clientSecret}",
-                   | "grant_type":"client_credentials", "scope":"api"}""".stripMargin)
-      .headers(Seq(("Accept", "application/json"), ("Content-Type", "application/json"))).method("PUT")
+//    val response: HttpRequest = Http(postUrl)
+//      .postData(s"""{"client_id":${config.clients.mtm.clientId}, "client_secret": "${config.clients.mtm.clientSecret}",
+//                   | "grant_type":"client_credentials", "scope":"api"}""".stripMargin)
+//      .headers(Seq(("Accept", "application/json"), ("Content-Type", "application/json"))).method("PUT")
 
   }
 
