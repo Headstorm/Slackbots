@@ -38,6 +38,7 @@ class MTMClient[F[_]]() extends Client {
         response.logger.info(s"Successful MTM GET")
         println(response)
         Right("Results")
+        //comment
 
     }
 
