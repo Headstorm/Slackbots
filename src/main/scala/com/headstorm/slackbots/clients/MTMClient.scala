@@ -36,7 +36,7 @@ class MTMClient[F[_]]() extends Client {
         val response: HttpResponse[String] = Http(getUrl).headers(Seq(("Accept", "application/json"),
           ("Authorization", s"Bearer ${token}"))).asString
         response.logger.info(s"Successful MTM GET")
-        println(response)
+        println(response.body)
         Right("Results")
         //comment
 
