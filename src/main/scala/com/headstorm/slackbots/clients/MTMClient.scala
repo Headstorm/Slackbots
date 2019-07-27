@@ -14,8 +14,6 @@ class MTMClient[F[_]]() extends Client {
 
   private val getUrl: String = s"${config.clients.mtm.api}/external/v1/consultant_locations/this_week"
 
-
-
   def getAccessToken: Either[circe.Error, String]=  {
     val response: HttpResponse[String] = Http(postUrl)
       .postData(s"""{"client_id":${config.clients.mtm.clientId}, "client_secret": "${config.clients.mtm.clientSecret}",
@@ -38,8 +36,6 @@ class MTMClient[F[_]]() extends Client {
         response.logger.info(s"Successful MTM GET")
         println(response.body)
         Right("Results")
-        //comment
-
     }
 
   }

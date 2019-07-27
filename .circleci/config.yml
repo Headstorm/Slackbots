@@ -1,19 +1,22 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/slack-bot-project
-
     docker:
-      -image: openjdk:8
+      - image: circleci/openjdk:8-jdk
 
     environemnt:
       SBT_VERSION: 1.0.4
+      POSTGRES_USER: postgres
+      POSTGRES_DB: circle_test
 
     steps:
       - checkout
-      -run:
+      - run:
+        name: sbt test compile
+        command: sbt test:compile
+      - run:
         name: Get sbt binary
         command: docker build -t /mtmbot .
-      -run:
+      - run:
         name: run image
         command: docker run -v /Users/faisalalnahhas/Documents/Faisal Alnahhas/slack-bot-project:/app/ mtmbot
