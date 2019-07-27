@@ -16,7 +16,4 @@ jobs:
           command: sbt test:compile
       - run:
           name: Get sbt binary
-          command: docker build -t /mtmbot .
-      - run:
-          name: run image
-          command: docker run -v /Users/faisalalnahhas/Documents/Faisal Alnahhas/slack-bot-project:/app/ mtmbot
+          command: docker build -t headstorm/slackbots:$CIRCLE_BRANCH .
