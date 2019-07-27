@@ -2,7 +2,7 @@ FROM openjdk:8-jre-alpine
 
 MAINTAINER Faisal Alnahhas <falnahhas@headstorm.com>
 
-ADD /* /app
+ADD ./ /app
 
 VOLUME [ "/app" ]
 
