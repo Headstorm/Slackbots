@@ -12,11 +12,11 @@ jobs:
     steps:
       - checkout
       - run:
-        name: sbt test compile
-        command: sbt test:compile
+          name: sbt test compile
+          command: sbt test:compile
       - run:
-        name: Get sbt binary
-        command: docker build -t /mtmbot .
+          name: Get sbt binary
+          command: docker build -t /mtmbot .
       - run:
-        name: run image
-        command: docker run -v /Users/faisalalnahhas/Documents/Faisal Alnahhas/slack-bot-project:/app/ mtmbot
+          name: run image
+          command: docker run -v /Users/faisalalnahhas/Documents/Faisal Alnahhas/slack-bot-project:/app/ mtmbot
