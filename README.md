@@ -16,6 +16,14 @@ Bots are located in the `bots` package
 
 Asynchronous standup bot
 
+### Vacation Bot
+
+Send standard vacation messages to the vacation channel, report regularly on who is OOO for the day/week to automatically keep people notified and reduce instances of "Where is Kevin?".  Let's get real, people don't check MTM, but Slack notifications are a easy way to keep the right people in the know.
+
+### PRetro Bot
+
+Send a customizable, standard PRetro to your private advisor channel. View metrics and get reminders on PRetros.
+
 ### MTM Bot
 
 Bot that integrates with the MTM Api.  Get and set consultant locations from Slack.
