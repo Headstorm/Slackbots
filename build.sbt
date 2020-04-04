@@ -1,27 +1,35 @@
 name := "slack-bots"
 
-scalaVersion := "2.12.8"
+organization := "com.headstorm"
+
+scalaVersion := "2.13.1"
 
 version := "0.2.0"
 
-resolvers += "scalac repo" at "https://raw.githubusercontent.com/ScalaConsultants/mvn-repo/master/"
-resolvers += Resolver.sonatypeRepo("snapshots")
-
-val circeVersion = "0.11.1"
-val http4sVersion = "0.21.0-SNAPSHOT"
+val circeVersion = "0.13.0"
+val http4sVersion = "0.21.3"
 
 libraryDependencies ++= Seq(
   "org.scalaj" %% "scalaj-http" % "2.4.2",
-  "com.github.slack-scala-client" %% "slack-scala-client" % "0.2.6",
+  "com.github.slack-scala-client" % "slack-scala-client_2.12" % "0.2.6",
   "io.circe" %% "circe-core" % circeVersion,
   "io.circe" %% "circe-generic"% circeVersion,
   "io.circe" %% "circe-parser"% circeVersion,
   "com.github.pureconfig" %% "pureconfig" % "0.11.1",
-  "com.outr" %% "scribe" % "2.7.3",
+  "com.outr" %% "scribe" % "2.7.12",
   "org.http4s" %% "http4s-dsl" % http4sVersion,
   "org.http4s" %% "http4s-blaze-server" % http4sVersion,
-  "org.http4s" %% "http4s-blaze-client" % http4sVersion,
+  "org.http4s" %% "http4s-blaze-client" % http4sVersion
 )
+
+wartremoverErrors ++= Warts.allBut(Wart.NonUnitStatements, Wart.Any, Wart.Nothing)
+
+import com.scalapenos.sbt.prompt.SbtPrompt.autoImport._
+
+promptTheme := com.scalapenos.sbt.prompt.PromptThemes.ScalapenosTheme
+
+//enablePlugins(JavaAppPackaging)
+//enablePlugins(DockerPlugin)
 
 scalacOptions ++= Seq(
   "-deprecation",                      // Emit warning and location for usages of deprecated APIs.
@@ -29,15 +37,14 @@ scalacOptions ++= Seq(
   "-explaintypes",                     // Explain type errors in more detail.
   "-feature",                          // Emit warning and location for usages of features that should be imported explicitly.
   "-language:existentials",            // Existential types (besides wildcard types) can be written and inferred
-  "-language:experimental.macros",     // Allow macro definition (besides implementation and application)
+  //  "-language:experimental.macros",   // Allow macro definition (besides implementation and application). Disabled, as this will significantly change in Scala 3
   "-language:higherKinds",             // Allow higher-kinded types
-  "-language:implicitConversions",     // Allow definition of implicit functions called views
+  //  "-language:implicitConversions",   // Allow definition of implicit functions called views. Disabled, as it might be dropped in Scala 3. Instead use extension methods (implemented as implicit class Wrapper(val inner: Foo) extends AnyVal {}
   "-unchecked",                        // Enable additional warnings where generated code depends on assumptions.
   "-Xcheckinit",                       // Wrap field accessors to throw an exception on uninitialized access.
   "-Xfatal-warnings",                  // Fail the compilation if there are any warnings.
-  "-Xfuture",                          // Turn on future language features.
+
   "-Xlint:adapted-args",               // Warn if an argument list is modified to match the receiver.
-  "-Xlint:by-name-right-associative",  // By-name parameter of right associative operator.
   "-Xlint:constant",                   // Evaluation of a constant arithmetic expression results in an error.
   "-Xlint:delayedinit-select",         // Selecting member of DelayedInit.
   "-Xlint:doc-detached",               // A Scaladoc comment appears to be detached from its element.
@@ -52,30 +59,33 @@ scalacOptions ++= Seq(
   "-Xlint:private-shadow",             // A private field (or class parameter) shadows a superclass field.
   "-Xlint:stars-align",                // Pattern sequence wildcard must align with sequence component.
   "-Xlint:type-parameter-shadow",      // A local type parameter shadows a type already in scope.
-  "-Xlint:unsound-match",              // Pattern match may not be typesafe.
-  "-Yno-adapted-args",                 // Do not adapt an argument list (either by inserting () or creating a tuple) to match the receiver.
-  "-Ypartial-unification",             // Enable partial unification in type constructor inference
-  "-Ywarn-dead-code",                  // Warn when dead code is identified.
-  "-Ywarn-extra-implicit",             // Warn when more than one implicit parameter section is defined.
-  "-Ywarn-inaccessible",               // Warn about inaccessible types in method signatures.
-  "-Ywarn-infer-any",                  // Warn when a type argument is inferred to be `Any`.
-  "-Ywarn-nullary-override",           // Warn when non-nullary `def f()' overrides nullary `def f'.
-  "-Ywarn-nullary-unit",               // Warn when nullary methods return Unit.
-  "-Ywarn-numeric-widen",              // Warn when numerics are widened.
-  "-Ywarn-unused:implicits",           // Warn if an implicit parameter is unused.
-  "-Ywarn-unused:imports",             // Warn if an import selector is not referenced.
-  "-Ywarn-unused:locals",              // Warn if a local definition is unused.
-  "-Ywarn-unused:params",              // Warn if a value parameter is unused.
-  "-Ywarn-unused:patvars",             // Warn if a variable bound in a pattern is unused.
-  "-Ywarn-unused:privates",            // Warn if a private member is unused.
-//  "-Ywarn-value-discard"               // Warn when non-Unit expression results are unused.
+  "-Xlint:unused",                     // TODO check if we still need -Wunused below
+  "-Xlint:nonlocal-return",            // A return statement used an exception for flow control.
+  "-Xlint:implicit-not-found",         // Check @implicitNotFound and @implicitAmbiguous messages.
+  "-Xlint:serial",                     // @SerialVersionUID on traits and non-serializable classes.
+  "-Xlint:valpattern",                 // Enable pattern checks in val definitions.
+  "-Xlint:eta-zero",                   // Warn on eta-expansion (rather than auto-application) of zero-ary method.
+  "-Xlint:eta-sam",                    // Warn on eta-expansion to meet a Java-defined functional interface that is not explicitly annotated with @FunctionalInterface.
+  "-Xlint:deprecation",                // Enable linted deprecations.
+
+  "-Wdead-code",                       // Warn when dead code is identified.
+  "-Wextra-implicit",                  // Warn when more than one implicit parameter section is defined.
+  "-Wmacros:both",                     // Lints code before and after applying a macro
+  "-Wnumeric-widen",                   // Warn when numerics are widened.
+  "-Woctal-literal",                   // Warn on obsolete octal syntax.
+  "-Wself-implicit",                   // Warn when an implicit resolves to an enclosing self-definition.
+  "-Wunused:imports",                  // Warn if an import selector is not referenced.
+  "-Wunused:patvars",                  // Warn if a variable bound in a pattern is unused.
+  "-Wunused:privates",                 // Warn if a private member is unused.
+  "-Wunused:locals",                   // Warn if a local definition is unused.
+  "-Wunused:explicits",                // Warn if an explicit parameter is unused.
+  "-Wunused:implicits",                // Warn if an implicit parameter is unused.
+  "-Wunused:params",                   // Enable -Wunused:explicits,implicits.
+  "-Wunused:linted",
+//  "-Wvalue-discard",                   // Warn when non-Unit expression results are unused.
+
+  "-Ybackend-parallelism", "8",                 // Enable paralellisation — change to desired number!
+  "-Ycache-plugin-class-loader:last-modified",  // Enables caching of classloaders for compiler plugins
+  "-Ycache-macro-class-loader:last-modified"   // and macro definitions. This can lead to performance improvements.
+
 )
-
-wartremoverErrors ++= Warts.allBut(Wart.NonUnitStatements, Wart.Any, Wart.Nothing)
-
-import com.scalapenos.sbt.prompt.SbtPrompt.autoImport._
-
-promptTheme := com.scalapenos.sbt.prompt.PromptThemes.ScalapenosTheme
-
-//enablePlugins(JavaAppPackaging)
-//enablePlugins(DockerPlugin)
