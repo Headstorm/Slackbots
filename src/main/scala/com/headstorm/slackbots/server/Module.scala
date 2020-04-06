@@ -2,8 +2,7 @@ package com.headstorm.slackbots.server
 
 import cats.effect._
 import cats.syntax.semigroupk._
-import com.headstorm.slackbots.bots.{ChessBot, HarvestBot, MTMBot, OnitamagoBot, ScalaBot, StandupBot}
-import com.headstorm.slackbots.clients.{HarvestClient, LichessClient, MTMClient, OnitamagoClient}
+import com.headstorm.slackbots.bots._
 import com.headstorm.slackbots.server.services.{BotService, DiagnosticService}
 import org.http4s.HttpRoutes
 
@@ -23,9 +22,9 @@ class Module[F[_]](
 
   //Initialize Headstorm Bots
   new StandupBot
-  new ScalaBot
-  new MTMBot[F](new MTMClient[F])
-  new ChessBot[F](new LichessClient[F])
-  new HarvestBot[F](new HarvestClient[F])
-  new OnitamagoBot[F](new OnitamagoClient[F])
+  //new ScalaBot
+  //new MTMBot[F](new MTMClient[F])
+  //new ChessBot[F](new LichessClient[F])
+  //new HarvestBot[F](new HarvestClient[F])
+  //new OnitamagoBot[F](new OnitamagoClient[F])
 }
